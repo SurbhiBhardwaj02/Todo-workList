@@ -1,0 +1,35 @@
+<%- include("header") -%>
+
+    <div class="switchbox">
+        <a href="<%= (listTitle === 'Work List') ? '/home' : '/work/' %>"> <%= (listTitle === 'Work List') ? 'Switch to HomeList' : 'Switch to WorkList' %> </a>
+    </div>
+
+    <div class="box" id="heading">
+        <h1> <%= listTitle %></h1>
+    </div>
+    
+
+    <div class="box">
+        <%newAddedItems.map((obj)=> { %>
+            <div class="item">
+                <input type="checkbox">
+                <p> <%= obj.name %></p>
+                <p hidden="on"> <%= obj._id %></p>
+                <form action="<%= (listTitle === 'Work List') ? '/work/' : '/home/' %><%= obj._id %>?_method=DELETE" method="post">
+                    <button id="change" type="submit" style="color:red">x</button>
+                </form>
+            </div>
+
+        <% })%>
+    
+    
+
+        <form class="item"  action="<%= (listTitle === 'Work List') ? '/work/' : '/home' %>" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+            <button id="add" type="submit" name="list" value="<%= listTitle  %>">+</button>
+        </form>
+    </div>
+<%- include("footer") -%>
+
+
+
